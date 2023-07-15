@@ -1,21 +1,38 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+
+import { Navbar } from './app/Navbar'
+import { PostsList } from './features/posts/PostsList';
+
+import { AddPostForm } from './features/posts/AddPostForm';
+import SomeRandom from './features/posts/get/SomeRandom';
 
 function App() {
   return (
-    <div className="App">
-      <nav>
-        <section>
-          <h1>Redux Fundamentals Example</h1>
-
-          <div className="navContent">
-            <div className="navLinks"></div>
-          </div>
-        </section>
-      </nav>
-      <section>
-        <h2>Welcome to the Redux Fundamentals example app</h2>
-      </section>
-    </div>
+    <Router>
+      <Navbar />
+      <div className="App">
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <React.Fragment>
+                <AddPostForm />
+                <PostsList />
+                <SomeRandom />
+              </React.Fragment>
+            )}
+          />
+          <Redirect to="/" />
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
